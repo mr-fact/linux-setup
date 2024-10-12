@@ -21,6 +21,12 @@ sudo apt install -y fish
 echo "Setting Fish as the default shell..."
 chsh -s /usr/bin/fish
 
+echo "Installing Oh My Fish (OMF)..."
+curl -L https://get.oh-my.fish | fish
+
+echo "Installing the 'scorphish' theme for Fish..."
+fish -c "omf install scorphish"
+
 echo "Installing htop..."
 sudo apt install -y htop
 
