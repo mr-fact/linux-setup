@@ -9,6 +9,7 @@ This repository contains multiple shell scripts to help you quickly set up a new
 - [Python and Django Setup](#python-and-django-setup)
 - [Docker Setup](#docker-setup)
 - [How to Use](#how-to-use)
+- [Command Assistance](#command-assistance)
 
 ## Introduction
 
@@ -118,3 +119,46 @@ chmod +x *.sh
 
 Feel free to fork this repository and make improvements or add additional setup scripts. Pull requests are welcome!
 
+## command assistance
+### nginx
+```bash
+# Create a New Server Block
+sudo nano /etc/nginx/sites-available/example.com
+
+# Create the Document Root
+sudo mkdir -p /var/www/example.com/
+sudo chown -R $USER:$USER /var/www/example.com/
+
+# Enable the Server Block
+sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/
+
+# Test and Reload Nginx
+sudo nginx -t
+sudo systemctl reload nginx
+```
+### Setting up SSL for Nginx
+```bash
+# Install Certbot
+sudo apt update
+sudo apt install certbot python3-certbot-nginx
+
+# Obtain an SSL Certificate
+sudo certbot --nginx -d example.com -d www.example.com
+
+# Check Nginx Configuration
+sudo nano /etc/nginx/sites-available/example.com
+# server {
+#     listen 80;
+#     server_name example.com www.example.com;
+#     return 301 https://$host$request_uri;
+# }
+# server {
+#     listen 443 ssl;
+#     server_name example.com www.example.com;
+# 
+#     ssl_certificate /etc/letsencrypt/live/example.com/fullchain.pem;
+#     ssl_certificate_key /etc/letsencrypt/live/example.com/privkey.pem;
+#
+#     ...
+# }
+```
