@@ -145,6 +145,9 @@ sudo apt install certbot python3-certbot-nginx
 # Obtain an SSL Certificate
 sudo certbot --nginx -d example.com -d www.example.com
 
+# Set Up Automatic Renewal
+sudo certbot renew --dry-run
+
 # Check Nginx Configuration
 sudo nano /etc/nginx/sites-available/example.com
 # server {
