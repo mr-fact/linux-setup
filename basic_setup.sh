@@ -33,6 +33,12 @@ sudo apt install -y htop
 echo "Installing btop..."
 sudo snap install btop
 
+echo "setup nginx..."
+sudo apt install nginx
+sudo systemctl start nginx
+sudo systemctl enable nginx
+sudo ufw allow 'Nginx Full'
+
 echo "Cleaning up unnecessary packages..."
 sudo apt autoremove -y
 
