@@ -8,6 +8,8 @@ services:
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
     restart: always
+    networks:
+      - mommy_cost_network
 
   node-exporter:
     image: prom/node-exporter:latest
@@ -15,7 +17,19 @@ services:
     ports:
       - "9100:9100"
     restart: always
+    networks:
+      - mommy_cost_network
 
+  postgres-exporter:
+    image: quay.io/prometheuscommunity/postgres-exporter
+    container_name: postgres-exporter
+    environment:
+      DATA_SOURCE_NAME: postgres://user:password@host/db?sslmode=disable
+    ports:
+      - "9187:9187"
+    networks:
+      - mommy_cost_network
+  
   grafana:
     image: grafana/grafana:latest
     container_name: grafana
@@ -27,3 +41,7 @@ services:
     depends_on:
       - prometheus
     restart: always
+
+networks:
+  mommy_cost_network:
+    external: true
